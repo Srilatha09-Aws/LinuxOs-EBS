@@ -1,0 +1,27 @@
+>ssh  -i yt-linux-pem(key pair name) ec2-user@ipaddress   ----open the cmd and enter the command to connect linux os 
+>sudo su ---privillage to root access
+>lsblk   ---to know the linux os volume.
+>df -Th  ----To check the volume  (-Th is the human readable)
+Now we need to create volume and attach the volume
+>cd  /dev/
+>ls
+>cd /home/ec2-user/    ----To come back to the root user
+>file -s ----If it gets data then there is no file system
+>file -s /dev/xvdf    --o/p :/dev/xvdf : data
+>mkfs -t xfs /dev/xvdf    (-- To mkfs we used to create file system ,-t what type of file system)
+>file -s /dev/xvdf
+>mkdir ytvolume  ---To create folder
+>ls   ---- ytvolume folder created
+>mount /dev/xvdf   ytvolume/  ----it will mount the 2gb data to the ytvolume folder
+>df -Th
+>cat /etc/mtab   ----the system will give entry and write in the etc/mtab file so that the folder won't delete once system is rebooted
+>vim /etc/fstab   ---- to edit the file
+>press i to go the new line
+>paste the changes and press esq :wq  to will save and exit from the file
+>mount -all
+>if we modify the volume then the os won't detect automatically
+>if we type df -Th ---here it won't reflect
+>but when we type Mountpoint here we ca find the volume is modified it
+>yum install xfsprogs
+>xfs_growfs -d /dev/xvdf
+>df -Th ---now we find that 2gb modified to 3gb
